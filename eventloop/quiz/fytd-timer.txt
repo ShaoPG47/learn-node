@@ -1,1 +1,13 @@
 - In eventloop/timer.js, what will be the order of execution? Briefly explain the order of execution w.r.t the event loop phases.
+The order will be:
+foo
+baz
+foo
+baz
+2 : bar
+1 : bar
+First, foo(2) operates, which will print foo, then push the bar(a//which is 2)
+to the event list, it will be executed in next loop, then it will run baz(),
+which will print baz, then the foo(1) will be executed, after the same process,
+foo and baz will print again, then the event list will push bar(2) and bar(1), which
+will print out 2: bar and 1 : bar.

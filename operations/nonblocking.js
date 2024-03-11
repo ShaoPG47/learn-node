@@ -7,5 +7,5 @@ function moreWork() {
 fs.readFile("data/test.txt", (err, data) => {
   if (err) console.log(err.message);
   else console.log(data);
-});
+}); //more work will print first
 moreWork();

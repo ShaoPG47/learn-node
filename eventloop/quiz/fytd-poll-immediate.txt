@@ -1,2 +1,14 @@
 - Explain the order of execution in terms of the event loop for eventloop/immediate.js.
+Error
+I was scheduled to run immediately
+7ms have passed since I was scheduled
+I assume that because the setTimeout, setImmediate and prints data or err all inside
+readFile loop, and there is a 10ms delay, so they will execute after the file is loaded, then it will print data or
+err, after that, setTimeout and setImmediate will be executed, setTimeout will be
+executed after 5ms, and setImmediate will execute immediately.
+
+
 - Will the order of execution change if timeout is changed to 0? Why or why not?
+No, although the delay was 5ms, but the actual delay is more than 5ms, which is 6-7ms in
+my case, so when I set the timeout to 0, then delay is also 1-2ms, it will not change
+the order.

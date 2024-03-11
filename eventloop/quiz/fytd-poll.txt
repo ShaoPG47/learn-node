@@ -1,1 +1,16 @@
 - In eventloop/poll.js, what will be the order of execution? Briefly explain the order of execution w.r.t the event loop phases.
+The order:
+foo
+done
+Read Error
+First, sameAsyncOperation() will be executed, while its loading, the other events
+will keep going, after it finished loading, it will be pushed to the event list,
+and prints out the data or read error. foo() will be executed right after the
+sameAsyncOperation() is executed, but it will not wait for it to be finished, so
+console wil print out foo first.
+Then, console will print out done, so the only thing left in event list is
+sameAsyncOperation(), it will return the output depends on the data, if reading was
+successful, then print "Data" + data, but in my case, it was unsuccessful, so it prints
+Read Error.
+This is because readFile is unblocking, node.js will not wait for something to finish
+then execute next line of code.
